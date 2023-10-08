@@ -1,0 +1,56 @@
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+lib/
+bin/
+build/
+vendor/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Environment variables
+.env
+
+# Editor directories and files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# MongoDB data directory
+data/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Nuxt.js
+.nuxt/
+dist/
+
+# TypeScript
+*.tsbuildinfo
+
+# Next.js
+out/

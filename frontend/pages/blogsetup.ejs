@@ -1,0 +1,48 @@
+<%- include("./layouts/header.ejs")%>
+
+<form action="/blog-setup" method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <label for="blog_title" class="form-label">Blog Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="blog_title"
+      name="blog_title"
+      aria-describedby="emailHelp"
+    />
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Blog LOGO</label>
+    <input type="file" class="form-control" id="blog_logo" name="blog_logo" />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Blog Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      name="description"
+    ></textarea>
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" />
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" />
+  </div>
+  <!-- <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div> -->
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<% if(typeof message !== 'undefined'){ %>
+<p style="color: red"><%=message%></p>
+
+<% } %> <%- include("./layouts/footer.ejs")%>
