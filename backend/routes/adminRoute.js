@@ -1,4 +1,3 @@
-const ejs = require("ejs");
 const path = require("path");
 const multer = require("multer");
 const express = require("express");
@@ -15,6 +14,7 @@ const {
   LoadProfile,
   LoadBilling,
   LoadBlogs,
+  AddPost,
 } = require("../controllers/adminController");
 const { isLogin } = require("../middlewares/adminLoginAuth");
 
@@ -55,6 +55,7 @@ admin_route.post("/blog-setup", upload.single("blog_logo"), BlogSetupPost);
 admin_route.get("/dashboard", isLogin, LoadDashboard);
 
 admin_route.get("/create-post", isLogin, LoadPostDashboard);
+admin_route.post("/create-post", isLogin, upload.single("blog_image"), AddPost);
 
 admin_route.get("/profile", isLogin, LoadProfile);
 

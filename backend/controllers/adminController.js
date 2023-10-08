@@ -1,7 +1,10 @@
 const User = require("../models/userModel");
+const Post = require("../models/postModel");
 const BlogSetting = require("../models/blogSettingModel");
 const Bcrypt = require("bcrypt");
 
+
+// Function for Secure password
 const securePassword = async (password) => {
   try {
     const hashedPassword = await Bcrypt.hash(password, 10);
@@ -15,7 +18,7 @@ const securePassword = async (password) => {
 
 
 
-
+// Load Blog Setup Page 
 const BlogSetup = async (req, res) => {
   try {
     const blogsetting = await BlogSetting.find({});
@@ -29,6 +32,7 @@ const BlogSetup = async (req, res) => {
   }
 };
 
+// Blog setup Here
 const BlogSetupPost = async (req, res) => {
   try {
     const { blog_title, description, name, email, password } = req.body;
@@ -61,13 +65,7 @@ const BlogSetupPost = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
-
+// Load Dashboard
 const LoadDashboard = async (req, res) => {
   try {
     res.render("dashboard.ejs");
@@ -77,15 +75,7 @@ const LoadDashboard = async (req, res) => {
 };
 
 
-const LoadBlogs = async (req, res) => {
-  try {
-    res.render("blogs.ejs");
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-
+// Load Billing
 const LoadBilling = async (req, res) => {
   try {
     res.render("billing.ejs");
@@ -95,6 +85,8 @@ const LoadBilling = async (req, res) => {
 };
 
 
+
+// Load Profile 
 const LoadProfile = async (req, res) => {
   try {
     res.render("profile.ejs");
@@ -105,6 +97,7 @@ const LoadProfile = async (req, res) => {
 
 
 
+// Load Post Dashboard
 const LoadPostDashboard = async (req, res) => {
   try {
     res.render("postDashboard.ejs");
@@ -113,4 +106,46 @@ const LoadPostDashboard = async (req, res) => {
   }
 };
 
-module.exports = { BlogSetup, BlogSetupPost, LoadDashboard, LoadPostDashboard ,LoadBlogs ,LoadBilling ,LoadProfile };
+const AddPost = async (req, res) => {
+  try {
+
+    const { title, content, subtitle, category } = req.body
+    const blog_image = req.file.filename
+
+    const post = new Post({
+      title,
+      content,
+      subtitle,
+      category,
+      blog_image
+    })
+
+    const postData = await post.save()
+
+    res.render("postDashboard.ejs", { message: "Post Added SuccessFully" })
+
+
+
+  } catch (error) {
+    console.log(error)
+
+  }
+}
+
+//
+
+
+// load Blogs
+const LoadBlogs = async (req, res) => {
+  try {
+    const data = await Post.find()
+    res.render("blogs.ejs", { data });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+
+
+module.exports = { BlogSetup, BlogSetupPost, LoadDashboard, LoadPostDashboard, LoadBlogs, LoadBilling, LoadProfile, AddPost };
